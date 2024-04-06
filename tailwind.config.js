@@ -1,15 +1,20 @@
 /** @type {import('tailwindcss').Config} */
+
+const defaultTheme = require('tailwindcss/defaultTheme')
+
 module.exports = {
   content: ["./src/**/*.{html,js,tsx}"],
   theme: {
     extend: {
       colors: {
-      "primary": "#AAAAAA",
-      "secondary-color": "",
-      "background-color":""
-    },},
-    
+        "primary-color": "red 600",
+        "secondary-color": "",
+        "background-color": ""
+      },
+      fontFamily: { sans: ['Inter var', ...defaultTheme.fontFamily.sans], }
+    },
+
   },
-  plugins: [],
+  plugins: [require('@tailwindcss/forms'),],
 }
 
