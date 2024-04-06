@@ -2,7 +2,7 @@ import React from 'react';
 
 import { useEffect } from 'react';
 import Header from './components/Header';
-import { DB } from "../../util/database"
+import {getPosts} from "../../util/database"
 import Post from "./components/Post"
 export default function ViewingPage() {
 
@@ -10,8 +10,7 @@ export default function ViewingPage() {
 		document.title = "Easel.ly"
         window.scrollTo(0,0)
 	}, []);
-
-	let posts: string[][] = new DB("test").posts;
+	let posts: string[][] = getPosts();
 	console.log(posts);
 	const post_components = posts.map((post) => 
 		<li>

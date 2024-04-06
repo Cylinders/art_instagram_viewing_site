@@ -1,5 +1,6 @@
 import Header from "../Header"
 import Login from "../Login"
+import {signIn, signOut} from "../../util/database"
 
 export default function LoginPage(){
     return(
@@ -10,7 +11,11 @@ export default function LoginPage(){
                 linkName="Sign Up"
                 linkUrl="/signup"
                 />
+                    
+                        
             <Login/>
+            {signIn()}
+            {signOut()}
         </>
     )
 }

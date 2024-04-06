@@ -6,7 +6,6 @@ import PublishingPage from './components/publishingpage/publishingpage';
 import ViewingPage from './components/viewingpage/viewingpage'; 
 import SignIn from './components/signin/signin'; 
 import LogIn from './components/login/login'; 
-import TestDatabase from './components/testDB/testDB'; 
 import {Route, Routes } from 'react-router-dom';
 
 function App() {
@@ -20,7 +19,6 @@ function App() {
             <Route path="/publishing" element={<PublishingPage />} />
             <Route path="/signup" element={<SignIn/>} />
             <Route path="/login" element={<LogIn/>} />
-            <Route path="/ruthvik" element={<TestDatabase/>} />
       </Routes>
 
 
