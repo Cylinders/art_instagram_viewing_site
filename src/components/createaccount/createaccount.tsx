@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { signIn } from "../../util/database";
+import { signUp } from "../../util/database";
 
 export default function CreateAccount() {
   const [username, setUsername] = useState("");
@@ -16,7 +16,7 @@ export default function CreateAccount() {
   const handleSubmit = (event: any) => {
     event.preventDefault();
 
-    signIn(username, password).then((success) => {
+    signUp(username, password).then((success) => {
       if (success) {
         window.location.href = "http://localhost:3000/seeposts";
       } else {

@@ -224,4 +224,26 @@ async function downloadImagesFromStorage(destinationDirectory) {
 // Call the function to download all images to a specified directory
 
 
-export { getPosts, getSign, signIn, getNav, addLike, makePost, signOut, createAccount, addComment, downloadAll };
+function signUp(email, password) {
+	const auth = getAuth();
+	return createUserWithEmailAndPassword(auth, email, password)
+		.then((userCredential) => {
+			// User account created successfully
+			const user = userCredential.user;
+			console.log('User created:', user);
+
+
+			return true;
+		})
+		.catch((error) => {
+			// Error occurred during account creation
+			const errorMessage = error.message;
+			console.error('Error creating user:', errorMessage);
+
+			return false;
+		});
+}
+
+
+
+export { getPosts, getSign, signIn, signUp, getNav, addLike, makePost, signOut, createAccount, addComment, downloadAll };
