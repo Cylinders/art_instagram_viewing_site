@@ -8,18 +8,23 @@ interface Post{
 
 const NewPost: FC<Post> = ({ title, img, author }) => {
     return(
-        <div className="mb-10 flex justify-center margin">
+        <div className="m-3 m-auto w-fit basis-1/4">
+            <p className="text-left text-lg text-red-600">
+                {author} {' '}
+            </p>
             <div className="flex justify-center margin">
                 <img 
                     alt="hello"
-                    className="h-24 w-24 mt-8"
-                    src={img}/>
+                    className="h-80 w-80 min-w-80"
+                    src={img}
+                />
+                
             </div>
-            <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-                {title}
-            </h2>
-            <h3 className="mt-6 text-center text-sm text-gray-900">
-{author}</h3>
+            <p className="text-left  text-xs font-light text-gray-900">
+                    {title}
+                </p>
+            
+            
         </div>
     )
 };

@@ -27,7 +27,7 @@ export default function ViewingPage() {
               heading="ARTfolio"
               paragraph=""
             />
-		<ul>{post_components}</ul>
+		<ul className="flex justify-center w-2/3 m-auto flex-wrap overflow-y-auto	">{post_components}</ul>
 		
 	</>
 
