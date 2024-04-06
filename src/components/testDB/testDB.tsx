@@ -8,9 +8,13 @@ import { DB } from "../../util/database";
 export default function TestDatabase() {
 
     
-	const userTest = new DB("bruh"); 
-    
-	console.log(userTest.logInWithEmailAndPassword("ogvruth@gmail", "ogvruth123"));   
+	const userTest = new DB(); 
+	
+	
+	
+	console.log(userTest.logInWithEmailAndPassword("ogvruth@gmail", "bruhbruhbruh"));   
+	// 😭💀
+	// not WORKING
 	
 	userTest.writeTest("SHREYAS"); 
     console.log("SUCCESS");
@@ -20,7 +24,7 @@ export default function TestDatabase() {
 
     return <div>
 		This page exists solely for test purposes. 
-		
+		<br></br>
 		<Link to="/">RETURN TO APP MAIN PAGE</Link> 
     </div>;
 }

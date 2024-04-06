@@ -24,30 +24,34 @@ const auth = getAuth(app);
 const authMain = getAuth();
 const db = getDatabase();
 const storage = getStorage();
+
 export class DB {
-    public alias: string;
+
+
+
+
     public email: string; 
     public username: string; 
-	public constructor(idInput: string) {
-		this.alias = idInput; 
+	
+	public constructor() {
         this.email = "";
         this.username = ""; 
 	}
-    public posts: string[][] = this.getPosts();
-
 	
 	public returnUser() {
 		return auth.currentUser; 
 	}
 	
+	
+	
 	public logInWithEmailAndPassword(email: string, password: string){
-			return signInWithEmailAndPassword(auth, email, password);
+			return signInWithEmailAndPassword(authMain, email, password);
 	};
-
+	
     public getPosts(): string[][]{
         return [["post name", "test picture", "author"]]
-    };
-
+    }
+	
     public createAccount(email: string, password: string, username: string){
         this.email = email; 
         this.username = username; 
