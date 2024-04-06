@@ -1,10 +1,11 @@
 import { initializeApp } from "firebase/app";
 import { getStorage } from "firebase/storage";
+import { ref as storageRef } from "firebase/storage"; 
 import firebase from "firebase/app";
 import "firebase/auth";
 import { GoogleAuthProvider, getAuth, signInWithPopup, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendPasswordResetEmail, signOut, } from "firebase/auth";
 import { getDatabase, ref, set } from "firebase/database";
-
+import { uploadBytes } from "firebase/storage"; 
 
 const firebaseConfig = {
   apiKey: "AIzaSyBWxx3OKOEQ1EFfeVruvRtVdFX2z-3czk4",
@@ -21,28 +22,55 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getDatabase();
+const storage = getStorage();
+
 export class DB {
     public alias: string;
     public email: string; 
     public username: string; 
 	public constructor(idInput: string) {
 		this.alias = idInput; 
+        this.email = "";
+        this.username = ""; 
 	}
 	
 	public logInWithEmailAndPassword(email: string, password: string){
 			return signInWithEmailAndPassword(auth, email, password);
 	};
 
+
+    public createAccount(email: string, password: string, username: string){
+        this.email = email; 
+        this.username = username; 
+        const auth = getAuth();
+        signInWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+        // Signed in 
+        const user = userCredential.user;
+        // ...
+        })
+        .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        });
+    }
+
     private initAccount() {
         console.log("BABY GIRL");
     }
-
+    // postimage should be the path to the directory FROM HERE lmao
+    
     public post(postName: string, postImage: string) {
-        set(ref(db, 'users/' + userId), {
-            username: name,
-            email: email,
-            profile_picture : imageUrl
+        set(ref(db, 'post/' + this.email), {
+            post: postImage,
         });
+
+        const postMain = storageRef(storage, postImage);
+
+        uploadBytes(postMain, File).then((snapshot) => {
+            console.log('Uploaded a blob or file!');
+        });
+
     }
 
 };
