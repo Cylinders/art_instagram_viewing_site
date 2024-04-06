@@ -6,13 +6,13 @@ import PublishingPage from './components/publishingpage/publishingpage';
 import ViewingPage from './components/viewingpage/viewingpage'; 
 import SignIn from './components/signin/signin'; 
 import LogIn from './components/login/login'; 
+
 import {Route, Routes } from 'react-router-dom';
 
 function App() {
   // wake me up when its all over
   // when im wiser and im older
   return ( <div>
-  
       <Routes>
 			<Route path="/" element={<ViewingPage />} />
             <Route path="/viewing" element={<ViewingPage />} />

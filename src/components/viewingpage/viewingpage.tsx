@@ -2,7 +2,7 @@ import React from 'react';
 
 import { useEffect } from 'react';
 import Header from './components/Header';
-import {getPosts} from "../../util/database"
+
 import Post from "./components/Post"
 export default function ViewingPage() {
 
