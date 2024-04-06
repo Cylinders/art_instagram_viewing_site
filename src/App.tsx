@@ -6,11 +6,10 @@ import PublishingPage from './components/publishingpage/publishingpage';
 import ViewingPage from './components/viewingpage/viewingpage'; 
 import SignIn from './components/signin/signin'; 
 import LogIn from './components/login/login'; 
-import TestDatabase from './components/testDB/testDB'; 
 
 import Header from './components/header/header'; 
 import {Route, Routes } from 'react-router-dom';
-
+import {GetUser} from './util/database';
 function App() {
   // wake me up when its all over
   // when im wiser and im older
@@ -22,7 +21,6 @@ function App() {
             <Route path="/publishing" element={<PublishingPage />} />
             <Route path="/signup" element={<SignIn/>} />
             <Route path="/login" element={<LogIn/>} />
-            <Route path="/ruthvik" element={<TestDatabase/>} />
       </Routes>
 
 
