@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { getDatabase } from "firebase/database";
+
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/firestore';
 import 'firebase/compat/auth';
@@ -134,4 +134,4 @@ function createAccount(email, password) {
 function addComment
 
 
-export {getPosts, GetUser, signIn, getNav, addLike, makePost, createAccount};
+export {getPosts, GetUser, signIn, getNav, addLike, makePost};
