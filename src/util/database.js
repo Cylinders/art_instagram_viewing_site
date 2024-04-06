@@ -7,8 +7,7 @@ import 'firebase/compat/analytics';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import GoogleButton from 'react-google-button'
 import { getDatabase, ref, set } from "firebase/database";
-
-
+import { getStorage , uploadBytes } from "firebase/storage";
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -72,29 +71,34 @@ function getPosts(){
     return [["post name", "https://is2-ssl.mzstatic.com/image/thumb/Purple123/v4/b2/1f/21/b21f21a8-e4f6-b7d2-1fec-8e5430273077/AppIcon-0-0-1x_U007emarketing-0-0-0-7-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/1200x630wa.png", "author"],["post name", "https://is2-ssl.mzstatic.com/image/thumb/Purple123/v4/b2/1f/21/b21f21a8-e4f6-b7d2-1fec-8e5430273077/AppIcon-0-0-1x_U007emarketing-0-0-0-7-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/1200x630wa.png", "author"],["post name", "https://is2-ssl.mzstatic.com/image/thumb/Purple123/v4/b2/1f/21/b21f21a8-e4f6-b7d2-1fec-8e5430273077/AppIcon-0-0-1x_U007emarketing-0-0-0-7-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/1200x630wa.png", "author"],["post name", "https://is2-ssl.mzstatic.com/image/thumb/Purple123/v4/b2/1f/21/b21f21a8-e4f6-b7d2-1fec-8e5430273077/AppIcon-0-0-1x_U007emarketing-0-0-0-7-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/1200x630wa.png", "author"],["post name", "https://is2-ssl.mzstatic.com/image/thumb/Purple123/v4/b2/1f/21/b21f21a8-e4f6-b7d2-1fec-8e5430273077/AppIcon-0-0-1x_U007emarketing-0-0-0-7-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/1200x630wa.png", "author"],["post name", "https://is2-ssl.mzstatic.com/image/thumb/Purple123/v4/b2/1f/21/b21f21a8-e4f6-b7d2-1fec-8e5430273077/AppIcon-0-0-1x_U007emarketing-0-0-0-7-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/1200x630wa.png", "author"],["post name", "https://is2-ssl.mzstatic.com/image/thumb/Purple123/v4/b2/1f/21/b21f21a8-e4f6-b7d2-1fec-8e5430273077/AppIcon-0-0-1x_U007emarketing-0-0-0-7-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/1200x630wa.png", "author"]]
 };
 
+const storage = getStorage();
+const storageRef = ref(storage, 'some-child');
 
-
-function makePost(byteString, postDescription, postName) {
+function makePost(title, postContent, postDescription, tag) {
 	const db = getDatabase();
-	set(ref(db, 'posts/' + postName), {
-		content: byteString,
-		description: postDescription,
-		likes: 0
+	uploadBytes(storageRef, postContent).then((snapshot) => {
+		console.log('Uploaded a blob or file!');
 	});
-	
-	
-	
+	set(ref(db, 'posts/' + title), {
+		name: title,
+		description: postDescription,
+		likes: 0,
+		artTags: tag, 
+	});
 }
 
 function addLike(postName){
+	
+	
 	const db = getDatabase();
-	const starCountRef = Number(ref(db, 'posts/' + postId + '/likes')) + 1;
+	
+	const likeCountRef = Number(ref(db, 'posts/' + postName + '/likes')) + 1;
+	
 	
 	set(ref(db, 'posts/' + postName), {
-		likes: 0
+		likes: likeCountRef
 	});
 	
-	return 1;
 }
 
 
