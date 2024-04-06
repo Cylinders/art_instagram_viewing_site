@@ -16,7 +16,13 @@ export default function SignUp() {
   const handleSubmit = (event: any) => {
     event.preventDefault();
 
-    signIn(username, password);
+    signIn(username, password).then((success) => {
+      if (success) {
+        window.location.href = "http://localhost:3000/publishing";
+      } else {
+        console.log("Sign-in failed");
+      }
+    });
 
     console.log("attempt", "attempted");
   };
