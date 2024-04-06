@@ -44,33 +44,27 @@ const signIn = async (email: string, password: string) => {
   });
 }
 
+    private initAccount() {
+        console.log("BABY GIRL");
+    }
+    // postimage should be the path to the directory FROM HERE lmao
+    
+    public post(postName: string, postImage: string) {
+        set(ref(db, 'post/' + this.email), {
+            post: postImage,
+        });
 
+        const postMain = storageRef(storage, postImage);
 
+        // uploadBytes(postMain, File).then((snapshot) => {
+        //     console.log('Uploaded a blob or file!');
+        // });
 
-export class DB {
+    }
 	
-	public email: string; 
-	
-	public password: string; 
-	
-	
-	public constructor() {
-		this.email = ""; 
-		this.password = ""; 
+	public writeTest(write: string){
+		set(ref(db, 'test'), {
+            test: write,
+        });
 	}
-	
-	public test() {	
-		signIn("ogvruth@gmail.com", "ogvogvogv");
-		this.write(); 
-		console.log("WORKS");
-	}
-	
-	
-	private write() {
-	  set(ref(db, 'users'), {
-		username: "HEY"
-	  });
-	}
-	
-	
 }

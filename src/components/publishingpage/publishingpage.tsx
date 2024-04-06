@@ -191,16 +191,6 @@ export default function PublishingPage() {
     setValue(buttonValue);
   };
 
-  const fileInput = document.getElementById("fileInput");
-
-  fileInput.addEventListener("change", (event) => {
-    // Get the selected file(s)
-    const selectedFile = event.target.files[0]; // Assuming single file selection
-
-    // Do something with the selected file, such as displaying its name
-    console.log("Selected file:", selectedFile.name);
-  });
-
   return (
     <>
       <div className="min-h-full">
