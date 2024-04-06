@@ -9,6 +9,8 @@ import LogIn from "./components/login/login";
 import LogOut from "./components/logout/logout";
 import Header from "./components/header/header";
 import SignUp from "./components/signup/signup";
+import CreatePost from "./components/createpost/createpost";
+import CreateAccount from "./components/createaccount/createaccount";
 import { Route, Routes } from "react-router-dom";
 
 function App() {
@@ -19,7 +21,9 @@ function App() {
       <Routes>
         <Route path="/" element={<ViewingPage />} />
         <Route path="/viewing" element={<ViewingPage />} />
-        <Route path="/publishing" element={<PublishingPage />} />
+        <Route path="/seeposts" element={<PublishingPage />} />
+        <Route path="/createpost" element={<CreatePost />} />
+        <Route path="/createaccount" element={<CreateAccount />} />
         <Route path="/login" element={<SignUp />} />
         <Route path="/logout" element={<LogOut />} />
       </Routes>

@@ -131,7 +131,13 @@ function getSign() {
 	return true;
 }
 function signOut() {
-	return true;
+	const auth = getAuth();
+	try {
+		signOut(auth);
+		console.log("Sign-out successful");
+	} catch (error) {
+		console.error("Error signing out:", error);
+	}
 }
 
 function addComment(post, message) {
@@ -218,4 +224,4 @@ async function downloadImagesFromStorage(destinationDirectory) {
 // Call the function to download all images to a specified directory
 
 
-export { getPosts, getSign, signIn, getNav, addLike, makePost, signOut, createAccount, addComment , downloadAll};
+export { getPosts, getSign, signIn, getNav, addLike, makePost, signOut, createAccount, addComment, downloadAll };

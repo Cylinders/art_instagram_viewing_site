@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { signIn } from "../../util/database";
 
-export default function SignUp() {
+export default function CreateAccount() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -20,7 +20,7 @@ export default function SignUp() {
       if (success) {
         window.location.href = "http://localhost:3000/seeposts";
       } else {
-        console.log("Sign-in failed");
+        console.log("Creation failed");
       }
     });
 
@@ -37,7 +37,7 @@ export default function SignUp() {
             alt="Your Company"
           />
           <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-            Sign in to your account
+            Create your account
           </h2>
         </div>
 
@@ -96,18 +96,18 @@ export default function SignUp() {
                 className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                 onClick={handleSubmit}
               >
-                Sign in
+                Sign Up
               </button>
             </div>
           </form>
 
           <p className="mt-10 text-center text-sm text-gray-500">
-            Don't have an account?{" "}
+            Already have an account?{" "}
             <a
-              href="createaccount"
+              href="login"
               className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
             >
-              Sign Up
+              Sign In
             </a>
           </p>
         </div>
