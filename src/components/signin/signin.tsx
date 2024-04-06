@@ -1,26 +1,16 @@
-import React from 'react';
+import Header from "../Header";
+import Signup from "../Signup";
 
-import { Link } from 'react-router-dom'
-import { useEffect } from 'react';
-import { NavLink } from "react-router-dom";
-
-
-export default function SignIn() {
-
-	useEffect(() => {
-		document.title = "Thing"
-        window.scrollTo(0,0)
-	}, []);
-
-    
-
-	return <div>
-			        
-		</div>
-
-
-
-
-
-
+export default function SignupPage(){
+    return(
+        <>
+            <Header
+              heading="Sign up to create an account"
+              paragraph="Already have an account? "
+              linkName="Login"
+              linkUrl="/login"
+            />
+            <Signup/>
+        </>
+    )
 }
