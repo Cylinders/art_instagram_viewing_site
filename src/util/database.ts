@@ -41,8 +41,13 @@ export class DB {
 	public returnUser() {
 		return auth.currentUser; 
 	}
-	
-	
+	public killUser() {
+		signOut(auth).then(() => {
+		  // Sign-out successful.
+		}).catch((error) => {
+		  // An error happened.
+		});
+	}
 	
 	public logInWithEmailAndPassword(email: string, password: string){
 			return signInWithEmailAndPassword(authMain, email, password);
