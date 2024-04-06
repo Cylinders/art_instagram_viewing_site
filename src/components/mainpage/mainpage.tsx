@@ -8,7 +8,7 @@ import { NavLink } from "react-router-dom";
 export default function MainPage() {
 
 	useEffect(() => {
-		document.title = "RedPanda Fencing"
+		document.title = "Art Insta"
         window.scrollTo(0,0)
 	}, []);
 
