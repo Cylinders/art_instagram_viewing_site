@@ -7,13 +7,15 @@ import ViewingPage from './components/viewingpage/viewingpage';
 import SignIn from './components/signin/signin'; 
 import LogIn from './components/login/login'; 
 import TestDatabase from './components/testDB/testDB'; 
+
+import Header from './components/header/header'; 
 import {Route, Routes } from 'react-router-dom';
 
 function App() {
   // wake me up when its all over
   // when im wiser and im older
   return ( <div>
-  
+	  <Header />
       <Routes>
 			<Route path="/" element={<ViewingPage />} />
             <Route path="/viewing" element={<ViewingPage />} />
