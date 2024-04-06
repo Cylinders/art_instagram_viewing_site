@@ -8,8 +8,9 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import GoogleButton from 'react-google-button'
 import { NavLink } from "react-router-dom"; 
 import { getStorage ,ref as stoRef ,uploadBytes } from "firebase/storage";
-import {child, get } from "firebase/database";
+import {child, get} from "firebase/database";
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
+import {ref, set } from "firebase/database";
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -131,7 +132,7 @@ function createAccount(email, password) {
 	
 }
 
-function addComment
+function addComment()
 
 
 export {getPosts, GetUser, signIn, getNav, addLike, makePost, createAccount};
