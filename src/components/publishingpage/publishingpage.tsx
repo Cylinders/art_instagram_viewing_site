@@ -47,7 +47,7 @@ export default function PublishingPage() {
     setSelectedTags(event.target.value);
   };
 
-  const handleSubmit = (event: all) => {
+  const handleSubmit = (event: any) => {
     event.preventDefault();
 
     console.log("Title:", selectedTitle);
@@ -225,6 +225,9 @@ export default function PublishingPage() {
     navigation[number].current = true;
     navigation[(number + 1) % 2].current = false;
     setValue(buttonValue);
+
+    console.log("Tag 1", navigation[0].current);
+    console.log("Tag 2", navigation[1].current);
   };
 
   return (
