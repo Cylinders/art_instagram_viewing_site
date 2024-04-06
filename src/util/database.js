@@ -189,7 +189,7 @@ function downloadAll() {
 const storage = getStorage();
 
 // Create a reference under which you want to list
-const listRef = ref(storage, 'files/uid');
+const listRef = stoRef(storage, 'files/uid');
 
 // Find all the prefixes and items.
 listAll(listRef)
@@ -205,23 +205,14 @@ getDownloadURL(ref(storage, 'images/stars.jpg'))
     // `url` is the download URL for 'images/stars.jpg'
 
     // This can be downloaded directly:
-    const xhr = new XMLHttpRequest();
-    xhr.responseType = 'blob';
-    xhr.onload = (event) => {
-      const blob = xhr.response;
-    };
-    xhr.open('GET', url);
-    xhr.send();
-
-    // Or inserted into an <img> element
     const img = document.getElementById('myimg');
     img.setAttribute('src', url);
+    return img; 
   })
   .catch((error) => {
     // Handle any errors
   });
 
-    });
   }).catch((error) => {
     // Uh-oh, an error occurred!
   });
