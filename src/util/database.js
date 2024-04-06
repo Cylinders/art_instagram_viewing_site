@@ -7,6 +7,9 @@ import 'firebase/compat/analytics';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import GoogleButton from 'react-google-button'
 import { NavLink } from "react-router-dom"; 
+import { getStorage ,ref as stoRef ,uploadBytes } from "firebase/storage";
+import {child, get } from "firebase/database";
+import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -21,34 +24,14 @@ firebase.initializeApp({
   storageBucket: "artinstagram-118a5.appspot.com",
   messagingSenderId: "1071095007421",
   appId: "1:1071095007421:web:b3bb6d6cc9cef916ebcfd4",
-  measurementId: "G-X52K68T1ZP"
+  measurementId: "G-X52K68T1ZP",
+  storageBucket: 'gs://artinstagram-118a5.appspot.com'
 });
 
 const auth = firebase.auth();
 const firestore = firebase.firestore();
 const analytics = firebase.analytics();
 
-function signIn(){
-  const signInWithGoogle = () => {
-    const provider = new firebase.auth.GoogleAuthProvider();
-    auth.signInWithPopup(provider);
-  }
-  
-
-  return (
-    <>
-    {
-            <GoogleButton
-              type="light"
-                className="m-auto w-1/2 flex justify-center border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 mt-10"
-                onClick={() => { signInWithGoogle() }}
-                />
-            
-        }
-    </>
-  )
-
-}
 
 function signOut() {
   return signin && (
@@ -70,4 +53,85 @@ function getNav(){
    }
   return <NavLink to="/login" className = "mx-auto h-max"><p className="text-center text-xs mx-auto mt-1 mb-0">Log In</p></NavLink>
 }
-export {getPosts, GetUser, signIn, getSign, getNav};
+
+function makePost(title, postContent, postDescription, tag) {
+
+	const storage = getStorage();
+
+	const storageRef = stoRef(storage, 'some-child');
+
+	const db = getDatabase();
+	uploadBytes(storageRef, postContent).then((snapshot) => {
+		console.log('Uploaded a blob or file!');
+	});
+	
+	
+	set(ref(db, 'posts/' + title), {
+		name: title,
+		likes: 0,
+		likes: {likes: 0},
+		artTags: tag, 
+		comments:{comment0: postDescription}
+	});
+}
+
+function addLike(postName){
+	
+	
+	const db = getDatabase();
+	
+	let likeNum = 0; 
+	const dbRef = ref(getDatabase());
+
+	get(child(dbRef, `posts/${postName}/likes`)).then((snapshot) => {
+	if (snapshot.exists()) {
+		likeNum = snapshot.val();
+	} else {
+		console.log("No data available");
+	}
+	}).catch((error) => {
+		console.error(error);
+	});
+
+	set(ref(db, 'posts/' + postName), {
+		likes: likeNum
+	});
+	
+	
+}
+
+function signIn(email, password) {
+	
+	const auth = getAuth();
+	signInWithEmailAndPassword(auth, email, password)
+	.then((userCredential) => {
+    // Signed in 
+    const user = userCredential.user;
+	// ...
+	})
+	.catch((error) => {
+		const errorCode = error.code;
+		const errorMessage = error.message;
+	});
+	
+	
+}
+
+function createAccount(email, password) {
+	const auth = getAuth();
+	createUserWithEmailAndPassword(auth, email, password)
+	.then((userCredential) => {
+		const user = userCredential.user;
+    })
+	.catch((error) => {
+		const errorCode = error.code;
+		const errorMessage = error.message;
+    
+	});	
+	
+}
+
+function addComment
+
+
+export {getPosts, GetUser, signIn, getNav, addLike, makePost};
