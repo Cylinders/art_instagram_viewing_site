@@ -7,13 +7,14 @@ import { useState } from "react";
 import SignUp from "../signup/signup";
 
 import { PhotoIcon, UserCircleIcon } from "@heroicons/react/24/solid";
-
+import {getPosts, downloadAll} from "../../util/database"
 import { Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 
 import { makePost } from "../../util/database.js";
 
+downloadAll(); 
 // Get from the Database
 const user = {
   name: "Tom Cook",
