@@ -7,19 +7,26 @@ import { NavLink } from "react-router-dom";
 import { DB } from "../../util/database";   
 export default function TestDatabase() {
 
-    const userTest = new DB("bruh"); 
-    console.log(userTest.logInWithEmailAndPassword("ogvruth@gmail", "ogvruth123"));   
+    
+	const userTest = new DB(); 
 	
-	console.log("SHREYAS");
+	
+	userTest.createAccount("vihas.veggalam@gmail.com", "VihasVeggalam", "VihasVeggalam")
+	
+	
+	// 😭💀
+	// not WORKING
+	
 	userTest.writeTest("SHREYAS"); 
     console.log("SUCCESS");
-
-
-
+	
+	
     const TEST = "hello world";
 
     return <div>
-     {TEST}
+		This page exists solely for test purposes. 
+		<br></br>
+		<Link to="/">RETURN TO APP MAIN PAGE</Link> 
     </div>;
 }
 
