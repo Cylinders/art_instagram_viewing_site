@@ -7,7 +7,7 @@ import 'firebase/compat/analytics';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import GoogleButton from 'react-google-button'
 import { NavLink } from "react-router-dom";
-import { getStorage, ref as stoRef, uploadBytes, listAll } from "firebase/storage";
+import { getStorage, ref as stoRef, uploadBytes, listAll, getDownloadURL} from "firebase/storage";
 import { child, get } from "firebase/database";
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
 
@@ -185,7 +185,48 @@ function signUp(email, password) {
 		});
 }
 
+function downloadAll() {
+const storage = getStorage();
 
+// Create a reference under which you want to list
+const listRef = ref(storage, 'files/uid');
+
+// Find all the prefixes and items.
+listAll(listRef)
+  .then((res) => {
+    res.prefixes.forEach((folderRef) => {
+      // All the prefixes under listRef.
+      // You may call listAll() recursively on them.
+    });
+    res.items.forEach((itemRef) => {
+        const storage = getStorage();
+getDownloadURL(ref(storage, 'images/stars.jpg'))
+  .then((url) => {
+    // `url` is the download URL for 'images/stars.jpg'
+
+    // This can be downloaded directly:
+    const xhr = new XMLHttpRequest();
+    xhr.responseType = 'blob';
+    xhr.onload = (event) => {
+      const blob = xhr.response;
+    };
+    xhr.open('GET', url);
+    xhr.send();
+
+    // Or inserted into an <img> element
+    const img = document.getElementById('myimg');
+    img.setAttribute('src', url);
+  })
+  .catch((error) => {
+    // Handle any errors
+  });
+
+    });
+  }).catch((error) => {
+    // Uh-oh, an error occurred!
+  });
+
+}
 
 
 export { getPosts, getSign, signIn, signUp, getNav, addLike, makePost, signOut, createAccount, addComment,};
