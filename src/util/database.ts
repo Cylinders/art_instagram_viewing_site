@@ -29,60 +29,48 @@ const authMain = getAuth();
 const db = getDatabase();
 const storage = getStorage();
 
-export class DB {
-	
-	private email: string; 
-	private password: string; 
-	private username: string;
-	
-	public constructor(){
-		this.email = "";
-		this.password = ""; 
-		this.username = ""; 
-	
-	}
-	
-	public createAccount(email: string, password: string) {
-		
-		this.email = email; 
-		this.password = password; 
-		
-		
-		
-		createUserWithEmailAndPassword(auth, email, password)
-			.then((userCredential) => {
-			// Signed up 
-			const user = userCredential.user;
-			// ...
-		})
-		.catch((error) => {
-			const errorCode = error.code;
-			const errorMessage = error.message;
-			// ..
-		});
-	}
-	
-	public sign(email: string, password: string) {
-		this.email = email; 
-		this.password = password; 
-		
-		signInWithEmailAndPassword(authMain, email, password)
-		.then((userCredential) => {
-		// Signed in 
-		const user = userCredential.user;
-		// ...
-		})
-		.catch((error) => {
-		const errorCode = error.code;
-		const errorMessage = error.message;
-		});
-		
-		
-		
-	}
-	
 
+const signIn = async (email: string, password: string) => {
 
-
+	signInWithEmailAndPassword(auth, email, password)
+  .then((userCredential) => {
+    // Signed in 
+    const user = userCredential.user;
+    // ...
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+  });
 }
 
+
+
+
+export class DB {
+	
+	public email: string; 
+	
+	public password: string; 
+	
+	
+	public constructor() {
+		this.email = ""; 
+		this.password = ""; 
+	}
+	
+	public test() {	
+		signIn("ogvruth@gmail.com", "ogvogvogv");
+		this.write(); 
+		console.log("WORKS");
+	}
+	
+	
+	private write() {
+	  set(ref(db, 'users'), {
+		username: "HEY"
+	  });
+	}
+	
+	
+}
