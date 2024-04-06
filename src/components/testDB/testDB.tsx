@@ -11,8 +11,9 @@ export default function TestDatabase() {
 	const userTest = new DB(); 
 	
 	
+	userTest.createAccount("vihas.veggalam@gmail.com", "VihasVeggalam", "VihasVeggalam")
 	
-	console.log(userTest.logInWithEmailAndPassword("ogvruth@gmail", "bruhbruhbruh"));   
+	
 	// 😭💀
 	// not WORKING
 	
