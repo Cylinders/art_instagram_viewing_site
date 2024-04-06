@@ -163,7 +163,7 @@ function downloadAll() {
 	const storage = getStorage();
 
 	// Create a reference under which you want to list
-	const listRef = ref(storage, '');
+	const listRef = stoRef(storage, '');
 
 	// Find all the prefixes and items.
 	listAll(listRef)
