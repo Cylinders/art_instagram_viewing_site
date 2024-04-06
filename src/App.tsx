@@ -5,6 +5,7 @@ import MainPage from './components/mainpage/mainpage';
 import PublishingPage from './components/publishingpage/publishingpage'; 
 import ViewingPage from './components/viewingpage/viewingpage'; 
 import SignIn from './components/signin/signin'; 
+import LogIn from './components/login/login'; 
 import {Route, Routes } from 'react-router-dom';
 function App() {
   // wake me up when its all over
@@ -15,7 +16,8 @@ function App() {
 			<Route path="/" element={<MainPage />} />
             <Route path="/viewing" element={<ViewingPage />} />
             <Route path="/publishing" element={<PublishingPage />} />
-            <Route path="/signin" element={<SignIn/>} />
+            <Route path="/signup" element={<SignIn/>} />
+            <Route path="/login" element={<LogIn/>} />
       </Routes>
 
 
