@@ -11,6 +11,8 @@ import { getStorage ,ref as stoRef ,uploadBytes } from "firebase/storage";
 import {child, get } from "firebase/database";
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
 
+import { getDatabase, ref, set } from "firebase/database";
+
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -33,11 +35,6 @@ const firestore = firebase.firestore();
 const analytics = firebase.analytics();
 
 
-function signOut() {
-  return signin && (
-    <button className="sign-out" onClick={() => callSignOut}>Sign Out</button>
-  )
-}
 
 function GetUser(){
   const user = useAuthState(auth);
@@ -48,7 +45,7 @@ function getPosts(){
     return [["post name", "https://is2-ssl.mzstatic.com/image/thumb/Purple123/v4/b2/1f/21/b21f21a8-e4f6-b7d2-1fec-8e5430273077/AppIcon-0-0-1x_U007emarketing-0-0-0-7-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/1200x630wa.png", "author"],["post name", "https://is2-ssl.mzstatic.com/image/thumb/Purple123/v4/b2/1f/21/b21f21a8-e4f6-b7d2-1fec-8e5430273077/AppIcon-0-0-1x_U007emarketing-0-0-0-7-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/1200x630wa.png", "author"],["post name", "https://is2-ssl.mzstatic.com/image/thumb/Purple123/v4/b2/1f/21/b21f21a8-e4f6-b7d2-1fec-8e5430273077/AppIcon-0-0-1x_U007emarketing-0-0-0-7-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/1200x630wa.png", "author"],["post name", "https://is2-ssl.mzstatic.com/image/thumb/Purple123/v4/b2/1f/21/b21f21a8-e4f6-b7d2-1fec-8e5430273077/AppIcon-0-0-1x_U007emarketing-0-0-0-7-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/1200x630wa.png", "author"],["post name", "https://is2-ssl.mzstatic.com/image/thumb/Purple123/v4/b2/1f/21/b21f21a8-e4f6-b7d2-1fec-8e5430273077/AppIcon-0-0-1x_U007emarketing-0-0-0-7-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/1200x630wa.png", "author"],["post name", "https://is2-ssl.mzstatic.com/image/thumb/Purple123/v4/b2/1f/21/b21f21a8-e4f6-b7d2-1fec-8e5430273077/AppIcon-0-0-1x_U007emarketing-0-0-0-7-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/1200x630wa.png", "author"],["post name", "https://is2-ssl.mzstatic.com/image/thumb/Purple123/v4/b2/1f/21/b21f21a8-e4f6-b7d2-1fec-8e5430273077/AppIcon-0-0-1x_U007emarketing-0-0-0-7-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/1200x630wa.png", "author"]]
 };
 function getNav(){
-  if(signin){
+  if(true){
     return signOut();
    }
   return <NavLink to="/login" className = "mx-auto h-max"><p className="text-center text-xs mx-auto mt-1 mb-0">Log In</p></NavLink>
@@ -58,7 +55,7 @@ function makePost(title, postContent, postDescription, tag) {
 
 	const storage = getStorage();
 
-	const storageRef = stoRef(storage, 'some-child');
+	const storageRef = stoRef(storage, 'posts');
 
 	const db = getDatabase();
 	uploadBytes(storageRef, postContent).then((snapshot) => {
@@ -131,7 +128,13 @@ function createAccount(email, password) {
 	
 }
 
-function addComment
+function getSign() {
+	return true; 
+}
+function signOut() {
+	return true; 
+}
 
 
-export {getPosts, GetUser, signIn, getNav, addLike, makePost};
+
+export {getPosts,getSign,  signIn, getNav, addLike, makePost, signOut};
