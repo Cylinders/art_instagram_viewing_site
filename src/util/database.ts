@@ -6,7 +6,7 @@ import "firebase/auth";
 import { GoogleAuthProvider, getAuth, signInWithPopup, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendPasswordResetEmail, signOut, } from "firebase/auth";
 import { getDatabase, ref, set } from "firebase/database";
 import { uploadBytes } from "firebase/storage"; 
-
+import { uploadString } from "firebase/storage";
 const firebaseConfig = {
   apiKey: "AIzaSyBWxx3OKOEQ1EFfeVruvRtVdFX2z-3czk4",
   authDomain: "artinstagram-118a5.firebaseapp.com",
@@ -64,12 +64,10 @@ export class DB {
         set(ref(db, 'post/' + this.email), {
             post: postImage,
         });
-
-        const postMain = storageRef(storage, postImage);
-
-        uploadBytes(postMain, File).then((snapshot) => {
-            console.log('Uploaded a blob or file!');
-        });
+        let currentRef = storageRef(storage, "posts"); 
+        uploadString(currentRef, postImage, 'base64url').then((snapshot) => {
+        console.log('Uploaded a base64url string!');
+        })
 
     }
 
