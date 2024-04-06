@@ -7,7 +7,8 @@ import 'firebase/compat/analytics';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import GoogleButton from 'react-google-button'
 import { getDatabase, ref, set } from "firebase/database";
-import { getStorage , uploadBytes } from "firebase/storage";
+import { getStorage ,ref as stoRef ,uploadBytes } from "firebase/storage";
+import {child, get } from "firebase/database";
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -22,7 +23,8 @@ firebase.initializeApp({
   storageBucket: "artinstagram-118a5.appspot.com",
   messagingSenderId: "1071095007421",
   appId: "1:1071095007421:web:b3bb6d6cc9cef916ebcfd4",
-  measurementId: "G-X52K68T1ZP"
+  measurementId: "G-X52K68T1ZP",
+  storageBucket: 'gs://artinstagram-118a5.appspot.com'
 });
 
 const auth = firebase.auth();
@@ -71,33 +73,45 @@ function getPosts(){
     return [["post name", "https://is2-ssl.mzstatic.com/image/thumb/Purple123/v4/b2/1f/21/b21f21a8-e4f6-b7d2-1fec-8e5430273077/AppIcon-0-0-1x_U007emarketing-0-0-0-7-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/1200x630wa.png", "author"],["post name", "https://is2-ssl.mzstatic.com/image/thumb/Purple123/v4/b2/1f/21/b21f21a8-e4f6-b7d2-1fec-8e5430273077/AppIcon-0-0-1x_U007emarketing-0-0-0-7-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/1200x630wa.png", "author"],["post name", "https://is2-ssl.mzstatic.com/image/thumb/Purple123/v4/b2/1f/21/b21f21a8-e4f6-b7d2-1fec-8e5430273077/AppIcon-0-0-1x_U007emarketing-0-0-0-7-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/1200x630wa.png", "author"],["post name", "https://is2-ssl.mzstatic.com/image/thumb/Purple123/v4/b2/1f/21/b21f21a8-e4f6-b7d2-1fec-8e5430273077/AppIcon-0-0-1x_U007emarketing-0-0-0-7-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/1200x630wa.png", "author"],["post name", "https://is2-ssl.mzstatic.com/image/thumb/Purple123/v4/b2/1f/21/b21f21a8-e4f6-b7d2-1fec-8e5430273077/AppIcon-0-0-1x_U007emarketing-0-0-0-7-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/1200x630wa.png", "author"],["post name", "https://is2-ssl.mzstatic.com/image/thumb/Purple123/v4/b2/1f/21/b21f21a8-e4f6-b7d2-1fec-8e5430273077/AppIcon-0-0-1x_U007emarketing-0-0-0-7-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/1200x630wa.png", "author"],["post name", "https://is2-ssl.mzstatic.com/image/thumb/Purple123/v4/b2/1f/21/b21f21a8-e4f6-b7d2-1fec-8e5430273077/AppIcon-0-0-1x_U007emarketing-0-0-0-7-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/1200x630wa.png", "author"]]
 };
 
-const storage = getStorage();
-const storageRef = ref(storage, 'some-child');
-
 function makePost(title, postContent, postDescription, tag) {
+
+	const storage = getStorage();
+
+	const storageRef = stoRef(storage, 'some-child');
+
 	const db = getDatabase();
 	uploadBytes(storageRef, postContent).then((snapshot) => {
 		console.log('Uploaded a blob or file!');
 	});
+	
+	
 	set(ref(db, 'posts/' + title), {
 		name: title,
 		description: postDescription,
-		likes: 0,
+		likes: {likes: 0},
 		artTags: tag, 
 	});
 }
 
 function addLike(postName){
-	
-	
 	const db = getDatabase();
-	
-	const likeCountRef = Number(ref(db, 'posts/' + postName + '/likes')) + 1;
-	
-	
-	set(ref(db, 'posts/' + postName), {
-		likes: likeCountRef
+	let likeNum = 0; 
+	const dbRef = ref(getDatabase());
+
+	get(child(dbRef, `posts/${postName}/likes`)).then((snapshot) => {
+	if (snapshot.exists()) {
+		likeNum = snapshot.val();
+	} else {
+		console.log("No data available");
+	}
+	}).catch((error) => {
+		console.error(error);
 	});
+
+	set(ref(db, 'posts/' + postName), {
+		likes: likeNum
+	});
+	
 	
 }
 
