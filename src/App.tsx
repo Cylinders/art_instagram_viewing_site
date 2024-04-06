@@ -1,4 +1,4 @@
-
+<<<<<<< HEAD
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
@@ -10,6 +10,7 @@ import LogIn from './components/login/login';
 import LogOut from './components/logout/logout';
 import Header from './components/header/header'; 
 import {Route, Routes } from 'react-router-dom';
+=======
 import React from "react";
 import logo from "./logo.svg";
 import "./App.css";
