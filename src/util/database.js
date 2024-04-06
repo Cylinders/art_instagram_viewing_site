@@ -187,4 +187,5 @@ function signUp(email, password) {
 
 
 
-export { getPosts, getSign, signIn, signUp, getNav, addLike, makePost, signOut, createAccount, addComment, downloadAll };
+
+export { getPosts, getSign, signIn, signUp, getNav, addLike, makePost, signOut, createAccount, addComment,};
