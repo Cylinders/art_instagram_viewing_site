@@ -9,7 +9,7 @@ export default function ViewingPage() {
 		document.title = "Easel.ly"
         window.scrollTo(0,0)
 	}, []);
-
+     
 	let posts: string[][] = DB.getPosts();
 	return <>
 		<Header

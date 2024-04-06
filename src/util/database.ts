@@ -21,6 +21,7 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
+const authMain = getAuth();
 const db = getDatabase();
 const storage = getStorage();
 
@@ -32,6 +33,10 @@ export class DB {
 		this.alias = idInput; 
         this.email = "";
         this.username = ""; 
+	}
+	
+	public returnUser() {
+		return auth.currentUser; 
 	}
 	
 	public logInWithEmailAndPassword(email: string, password: string){
@@ -74,5 +79,14 @@ export class DB {
         // });
 
     }
+	
+	public writeTest(write: string){
+		set(ref(db, 'test'), {
+            test: write,
+        });
+	}
+
+
+
 
 };
