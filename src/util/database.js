@@ -7,7 +7,7 @@ import 'firebase/compat/analytics';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import GoogleButton from 'react-google-button'
 import { NavLink } from "react-router-dom"; 
-import { getStorage ,ref as stoRef ,uploadBytes } from "firebase/storage";
+import { getStorage ,ref as stoRef ,uploadBytes , listAll} from "firebase/storage";
 import {child, get } from "firebase/database";
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
 
@@ -158,5 +158,29 @@ function addComment(post, message){
 	
 	
 }
+
+function downloadAll(){
+
+    const storage = getStorage();
+
+    // Create a reference under which you want to list
+    const listRef = ref(storage, '');
+
+    // Find all the prefixes and items.
+    listAll(listRef)
+    .then((res) => {
+    res.prefixes.forEach((folderRef) => {
+      // You may call listAll() recursively on them.
+    });
+    res.items.forEach((itemRef) => {
+      // All the items under listRef.
+        console.log(itemRef); 
+    });
+    }).catch((error) => {
+    // Uh-oh, an error occurred!
+    });
+
+}
+
 
 export {getPosts,getSign,  signIn, getNav, addLike, makePost, signOut, createAccount, addComment};
