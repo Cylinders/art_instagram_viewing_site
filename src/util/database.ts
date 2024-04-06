@@ -29,42 +29,4 @@ const authMain = getAuth();
 const db = getDatabase();
 const storage = getStorage();
 
-
-const signIn = async (email: string, password: string) => {
-
-	signInWithEmailAndPassword(auth, email, password)
-  .then((userCredential) => {
-    // Signed in 
-    const user = userCredential.user;
-    // ...
-  })
-  .catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-  });
-}
-
-    private initAccount() {
-        console.log("BABY GIRL");
-    }
-    // postimage should be the path to the directory FROM HERE lmao
-    
-    public post(postName: string, postImage: string) {
-        set(ref(db, 'post/' + this.email), {
-            post: postImage,
-        });
-
-        const postMain = storageRef(storage, postImage);
-
-        // uploadBytes(postMain, File).then((snapshot) => {
-        //     console.log('Uploaded a blob or file!');
-        // });
-
-    }
-	
-	public writeTest(write: string){
-		set(ref(db, 'test'), {
-            test: write,
-        });
-	}
-}
+export {};
