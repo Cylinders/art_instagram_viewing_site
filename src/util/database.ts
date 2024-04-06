@@ -3,6 +3,8 @@ import { getStorage } from "firebase/storage";
 import firebase from "firebase/app";
 import "firebase/auth";
 import { GoogleAuthProvider, getAuth, signInWithPopup, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendPasswordResetEmail, signOut, } from "firebase/auth";
+import { getDatabase, ref, set } from "firebase/database";
+
 
 const firebaseConfig = {
   apiKey: "AIzaSyBWxx3OKOEQ1EFfeVruvRtVdFX2z-3czk4",
@@ -18,15 +20,29 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
-const userAuth = firebase.auth();
+const db = getDatabase();
 export class DB {
-    public alias: string; 
+    public alias: string;
+    public email: string; 
+    public username: string; 
 	public constructor(idInput: string) {
 		this.alias = idInput; 
 	}
 	
-	public logInWithEmailAndPassword(email: string, password: string) : Promise<boolean> {
-			return await signInWithEmailAndPassword(auth, email, password);
+	public logInWithEmailAndPassword(email: string, password: string){
+			return signInWithEmailAndPassword(auth, email, password);
 	};
+
+    private initAccount() {
+        console.log("BABY GIRL");
+    }
+
+    public post(postName: string, postImage: string) {
+        set(ref(db, 'users/' + userId), {
+            username: name,
+            email: email,
+            profile_picture : imageUrl
+        });
+    }
 
 };
