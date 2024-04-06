@@ -1,18 +1,24 @@
-/*
-  This example requires some changes to your config:
-  
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/forms'),
-    ],
-  }
-  ```
-*/
-export default function Example() {
+import { useState } from "react";
+import { signIn } from "../../util/database";
+
+export default function SignUp() {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleUsernameChange = (event: any) => {
+    setUsername(event.target.value);
+  };
+
+  const handlePasswordChange = (event: any) => {
+    setPassword(event.target.value);
+  };
+
+  const handleSubmit = (event: any) => {
+    event.preventDefault();
+
+    signIn(username, password);
+  };
+
   return (
     <>
       {/*
@@ -36,7 +42,12 @@ export default function Example() {
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form className="space-y-6" action="#" method="POST">
+          <form
+            className="space-y-6"
+            action="publishing"
+            onSubmit={handleSubmit}
+            method="POST"
+          >
             <div>
               <label
                 htmlFor="email"
@@ -52,6 +63,7 @@ export default function Example() {
                   autoComplete="email"
                   required
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  onChange={handleUsernameChange}
                 />
               </div>
             </div>
@@ -73,6 +85,7 @@ export default function Example() {
                   autoComplete="current-password"
                   required
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  onChange={handlePasswordChange}
                 />
               </div>
             </div>
@@ -81,6 +94,7 @@ export default function Example() {
               <button
                 type="submit"
                 className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                onClick={handleSubmit}
               >
                 Sign in
               </button>
