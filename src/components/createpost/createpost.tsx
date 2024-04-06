@@ -28,7 +28,7 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function PublishingPage() {
+export default function CreatePost() {
   const [selectedFile, setSelectedFile] = useState(null);
   const [selectedTitle, setSelectedTitle] = useState(null);
   const [selectedDescription, setSelectedDescription] = useState(null);
@@ -64,7 +64,7 @@ export default function PublishingPage() {
   const navigation = [
     {
       name: "Current Posts",
-      current: true,
+      current: false,
       content: (
         <div>
           <header className="bg-white shadow">
@@ -86,7 +86,7 @@ export default function PublishingPage() {
     },
     {
       name: "Create New Post",
-      current: false,
+      current: true,
       content: (
         <div>
           <header className="bg-white shadow">
@@ -226,7 +226,7 @@ export default function PublishingPage() {
     },
   ];
 
-  const [value, setValue] = useState(navigation[0].content);
+  const [value, setValue] = useState(navigation[1].content);
 
   const handleClick = (buttonValue: any, number: number) => {
     navigation[number].current = true;
@@ -332,6 +332,21 @@ export default function PublishingPage() {
                                 )}
                               </Menu.Item>
                             ))}
+                            <a
+                              key="Sign Out"
+                              href="login"
+                              className={classNames(
+                                false
+                                  ? "bg-gray-900 text-white"
+                                  : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                                "rounded-md px-3 py-2 text-sm font-medium"
+                              )}
+                              aria-current={false ? "page" : undefined}
+                              onClick={handleSignOut}
+                            >
+                              {" "}
+                              Sign Out{" "}
+                            </a>
                           </Menu.Items>
                         </Transition>
                       </Menu>

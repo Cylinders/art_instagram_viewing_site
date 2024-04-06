@@ -131,7 +131,13 @@ function getSign() {
 	return true;
 }
 function signOut() {
-	return true;
+	const auth = getAuth();
+	try {
+		signOut(auth);
+		console.log("Sign-out successful");
+	} catch (error) {
+		console.error("Error signing out:", error);
+	}
 }
 
 function addComment(post, message) {
@@ -182,4 +188,4 @@ function downloadAll() {
 }
 
 
-export { getPosts, getSign, signIn, getNav, addLike, makePost, signOut, createAccount, addComment , downloadAll};
+export { getPosts, getSign, signIn, getNav, addLike, makePost, signOut, createAccount, addComment, downloadAll };
