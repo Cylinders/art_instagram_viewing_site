@@ -182,4 +182,4 @@ function downloadAll() {
 }
 
 
-export { getPosts, getSign, signIn, getNav, addLike, makePost, signOut, createAccount, addComment };
+export { getPosts, getSign, signIn, getNav, addLike, makePost, signOut, createAccount, addComment , downloadAll};
