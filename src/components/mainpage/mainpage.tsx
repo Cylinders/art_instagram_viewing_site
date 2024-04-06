@@ -21,10 +21,21 @@ export default function MainPage() {
 			{TEST}  
 	
 	</div>
-
-
-
-
-
-
 }
+const styles = StyleSheet.create({
+    root: {
+        alignItems: 'center',
+        padding: 20,
+        position: 'relative',
+        height: '100%',
+    },
+    logo: {
+        width: '70%',
+        maxWidth: 300,
+        height: '40%',
+        maxHeight: 300
+    },
+    error_text: {
+        color: 'green'
+    }
+})

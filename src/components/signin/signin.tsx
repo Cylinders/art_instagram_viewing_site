@@ -5,19 +5,17 @@ import { useEffect } from 'react';
 import { NavLink } from "react-router-dom";
 
 
-export default function PublishingPage() {
+export default function SignIn() {
 
 	useEffect(() => {
-		document.title = "Publishing Page"
+		document.title = "Thing"
         window.scrollTo(0,0)
 	}, []);
 
     
 
 	return <div>
-			
-			TEST TEST
-        
+			        
 		</div>
 
 
