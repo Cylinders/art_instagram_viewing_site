@@ -7,6 +7,8 @@ import { GoogleAuthProvider, getAuth, signInWithPopup, signInWithEmailAndPasswor
 import { getDatabase, ref, set } from "firebase/database";
 import { uploadBytes } from "firebase/storage"; 
 import { uploadString } from "firebase/storage";
+
+
 const firebaseConfig = {
   apiKey: "AIzaSyBWxx3OKOEQ1EFfeVruvRtVdFX2z-3czk4",
   authDomain: "artinstagram-118a5.firebaseapp.com",
@@ -17,6 +19,8 @@ const firebaseConfig = {
   appId: "1:1071095007421:web:b3bb6d6cc9cef916ebcfd4",
   measurementId: "G-X52K68T1ZP"
 };
+
+
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
@@ -88,6 +92,58 @@ export class DB {
         });
 	}
 
+export class DB {
+	
+	private email: string; 
+	private password: string; 
+	private username: string;
+	
+	public constructor(){
+		this.email = "";
+		this.password = ""; 
+		this.username = ""; 
+	
+	}
+	
+	public createAccount(email: string, password: string) {
+		
+		this.email = email; 
+		this.password = password; 
+		
+		
+		
+		createUserWithEmailAndPassword(auth, email, password)
+			.then((userCredential) => {
+			// Signed up 
+			const user = userCredential.user;
+			// ...
+		})
+		.catch((error) => {
+			const errorCode = error.code;
+			const errorMessage = error.message;
+			// ..
+		});
+	}
+	
+	public sign(email: string, password: string) {
+		this.email = email; 
+		this.password = password; 
+		
+		signInWithEmailAndPassword(authMain, email, password)
+		.then((userCredential) => {
+		// Signed in 
+		const user = userCredential.user;
+		// ...
+		})
+		.catch((error) => {
+		const errorCode = error.code;
+		const errorMessage = error.message;
+		});
+		
+		
+		
+	}
+	
 
 
 }

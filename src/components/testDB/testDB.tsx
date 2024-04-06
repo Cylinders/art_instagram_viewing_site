@@ -7,17 +7,12 @@ import { NavLink } from "react-router-dom";
 import { DB } from "../../util/database";   
 export default function TestDatabase() {
 
-    
-	const userTest = new DB(); 
-	
-	
-	userTest.createAccount("vihas.veggalam@gmail.com", "VihasVeggalam", "VihasVeggalam")
-	
+    let x = new DB(); 
+	x.test();
 	
 	// 😭💀
 	// not WORKING
 	
-	userTest.writeTest("SHREYAS"); 
     console.log("SUCCESS");
 	
 	
