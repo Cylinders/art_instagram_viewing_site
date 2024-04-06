@@ -38,7 +38,9 @@ export class DB {
 			return signInWithEmailAndPassword(auth, email, password);
 	};
 
-
+    public getPosts(): string[][]{
+        return [["post name", "test picture", "author"]]
+    }
     public createAccount(email: string, password: string, username: string){
         this.email = email; 
         this.username = username; 
@@ -64,10 +66,12 @@ export class DB {
         set(ref(db, 'post/' + this.email), {
             post: postImage,
         });
-        let currentRef = storageRef(storage, "posts"); 
-        uploadString(currentRef, postImage, 'base64url').then((snapshot) => {
-        console.log('Uploaded a base64url string!');
-        })
+
+        const postMain = storageRef(storage, postImage);
+
+        // uploadBytes(postMain, File).then((snapshot) => {
+        //     console.log('Uploaded a blob or file!');
+        // });
 
     }
 

@@ -1,12 +1,9 @@
-import {Link} from 'react-router-dom';
-import logo from "./../static/imgs/LOGO_2.png";
+import logo from "./../../../static/imgs/LOGO_2.png";
 
 
 export default function Header({
     heading,
     paragraph,
-    linkName,
-    linkUrl="#"
 }){
     return(
         <div className="mb-10">
@@ -21,9 +18,7 @@ export default function Header({
             </h2>
             <p className="mt-2 text-center text-sm text-gray-600 mt-5">
             {paragraph} {' '}
-            <Link to={linkUrl} className="font-medium text-blue-600 hover:text-blue-500">
-                {linkName}
-            </Link>
+
             </p>
         </div>
     )

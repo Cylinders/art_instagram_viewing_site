@@ -1,24 +1,23 @@
 import React from 'react';
 
-import { Link } from 'react-router-dom'
 import { useEffect } from 'react';
-import { NavLink } from "react-router-dom";
-
-
+import Header from './components/Header';
+import { DB } from "../../util/database"
 export default function ViewingPage() {
 
 	useEffect(() => {
-		document.title = "RedPanda Fencing"
+		document.title = "Easel.ly"
         window.scrollTo(0,0)
 	}, []);
 
-
-	return <div>
-			
-			TEST TEST
-        
-		</div>
-
+	let posts: string[][] = DB.getPosts();
+	return <>
+		<Header
+              heading="ARTfolio"
+              paragraph=""
+            />
+		
+	</>
 
 
 
