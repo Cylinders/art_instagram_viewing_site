@@ -1,8 +1,13 @@
 import Header from "../Header"
 import Login from "../Login"
-import {signIn, signOut} from "../../util/database"
+import {signIn, signOut, GetUser} from "../../util/database"
+import { Navigate } from "react-router-dom";
 
 export default function LoginPage(){
+    console.log(GetUser())
+    if(GetUser()){
+        return <Navigate to ="/"/>
+    }
     return(
         <>
              <Header
@@ -11,11 +16,10 @@ export default function LoginPage(){
                 linkName="Sign Up"
                 linkUrl="/signup"
                 />
-                    
-                        
+                           
             <Login/>
-            {signIn()}
-            {signOut()}
+            {signIn()}   
+                     
         </>
     )
 }
