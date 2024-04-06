@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { useState } from "react";
+import SignUp from "../signup/signup";
 
 import { PhotoIcon, UserCircleIcon } from "@heroicons/react/24/solid";
 
@@ -11,7 +12,7 @@ import { Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 
-import {makePost} from "../../util/database.js";
+import { makePost } from "../../util/database.js";
 
 // Get from the Database
 const user = {
@@ -56,8 +57,8 @@ export default function PublishingPage() {
     console.log("Description:", selectedDescription);
     console.log("Tags:", selectedTags);
     console.log("File", selectedFile);
-	
-	makePost(selectedTitle, selectedFile, selectedDescription, selectedTags); 
+
+    makePost(selectedTitle, selectedFile, selectedDescription, selectedTags);
   };
 
   const navigation = [
