@@ -8,10 +8,11 @@ import { NavLink } from "react-router-dom";
 export default function PublishingPage() {
 
 	useEffect(() => {
-		document.title = "RedPanda Fencing"
+		document.title = "Publishing Page"
         window.scrollTo(0,0)
 	}, []);
 
+    
 
 	return <div>
 			
