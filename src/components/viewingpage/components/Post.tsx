@@ -8,7 +8,7 @@ interface Post{
 
 const NewPost: FC<Post> = ({ title, img, author }) => {
     return(
-        <div className="m-3 m-auto w-fit basis-1/4">
+        <div className="m-8 m-auto w-fit basis-1/4">
             <p className="text-left text-lg text-red-600">
                 {author} {' '}
             </p>

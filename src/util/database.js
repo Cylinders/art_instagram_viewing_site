@@ -82,7 +82,7 @@ function addLike(postName){
 
 	get(child(dbRef, `posts/${postName}/likes`)).then((snapshot) => {
 	if (snapshot.exists()) {
-		likeNum = snapshot.val();
+		likeNum = Number(snapshot.val());
 	} else {
 		console.log("No data available");
 	}
@@ -91,7 +91,7 @@ function addLike(postName){
 	});
 
 	set(ref(db, 'posts/' + postName), {
-		likes: likeNum
+		likes: likeNum + 1
 	});
 	
 	
@@ -135,6 +135,28 @@ function signOut() {
 	return true; 
 }
 
+function addComment(post, message){	
 
+	const db = getDatabase();
+	
+	let likeNum = {}; 
+	const dbRef = ref(getDatabase());
 
-export {getPosts,getSign,  signIn, getNav, addLike, makePost, signOut};
+	get(child(dbRef, `posts/${post}/likes`)).then((snapshot) => {
+	if (snapshot.exists()) {
+		likeNum = Number(snapshot.val());
+	} else {
+		console.log("No data available");
+	}
+	}).catch((error) => {
+		console.error(error);
+	});
+
+	set(ref(db, 'posts/' + post + "/likes"), {
+		likes: message
+	});
+	
+	
+}
+
+export {getPosts,getSign,  signIn, getNav, addLike, makePost, signOut, createAccount, addComment};
