@@ -23,7 +23,6 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getDatabase();
 const storage = getStorage();
-
 export class DB {
     public alias: string;
     public email: string; 
@@ -33,14 +32,16 @@ export class DB {
         this.email = "";
         this.username = ""; 
 	}
-	
+    public posts: string[][] = this.getPosts();
+
 	public logInWithEmailAndPassword(email: string, password: string){
 			return signInWithEmailAndPassword(auth, email, password);
 	};
 
     public getPosts(): string[][]{
         return [["post name", "test picture", "author"]]
-    }
+    };
+
     public createAccount(email: string, password: string, username: string){
         this.email = email; 
         this.username = username; 
