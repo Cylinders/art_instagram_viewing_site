@@ -186,21 +186,18 @@ function signUp(email, password) {
 }
 
 function downloadAll() {
-const storage = getStorage();
+    const listRef = stoRef(storage, 'files/uid');
 
-// Create a reference under which you want to list
-const listRef = stoRef(storage, 'files/uid');
-
+    const storage = getStorage();
 // Find all the prefixes and items.
-listAll(listRef)
+    listAll(listRef)
   .then((res) => {
     res.prefixes.forEach((folderRef) => {
       // All the prefixes under listRef.
       // You may call listAll() recursively on them.
     });
     res.items.forEach((itemRef) => {
-        const storage = getStorage();
-getDownloadURL(ref(storage, 'images/stars.jpg'))
+    getDownloadURL(ref(storage, 'images/stars.jpg'))
   .then((url) => {
     // `url` is the download URL for 'images/stars.jpg'
 
@@ -210,14 +207,19 @@ getDownloadURL(ref(storage, 'images/stars.jpg'))
     return img; 
   })
   .catch((error) => {
+      console.log("bruh"); 
     // Handle any errors
   });
 
   }).catch((error) => {
+      console.log("bruh"); 
     // Uh-oh, an error occurred!
   });
 
-}
 
+
+
+
+}
 
 export { getPosts, getSign, signIn, signUp, getNav, addLike, makePost, signOut, createAccount, addComment,};
